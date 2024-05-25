@@ -3,15 +3,16 @@
 FROM python:3.10.14
 
 # Set the working directory
-WORKDIR /code
-#
-COPY ./requirements.txt /code/requirements.txt
+WORKDIR /app
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-#
-COPY ./app /code/app
+COPY requirements.txt .
 
-# Expose the port FastAPI will run on
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code to the working directory
+COPY app /app/app
+
+# Expose the port that the app runs on
 EXPOSE 8080
 
 # Define the command to run the application
